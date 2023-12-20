@@ -1,0 +1,71 @@
+<header id="navbar-main">
+  <div class="first-nav">
+    <ul class="flex-start">
+      <li>
+        <i class="fa-solid fa-bars fa-2xl"></i>
+      </li>
+      <li>
+        <a href="#"><img src="assets\Image\Logo-0.png" alt=""></a>
+      </li>
+    </ul>
+    <ul class="flex-center">
+      <li>
+        <input type="text" placeholder="Search Here!">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+
+      </li>
+    </ul>
+    <ul class="flex-end">
+
+      <li>
+        <span>
+          <i class="fa-solid fa-phone"></i></span>
+      </li>
+
+      <li class="nav-login">
+        <span id="btn-login">
+          <i class="fa-regular fa-user fa-lg">&nbsp;&nbsp;</i>
+          <ng-container *ngIf="isLoginn"> {{email}} </ng-container>
+        </span>
+        <div id="login-flyout">
+          <div><i class="fa-solid fa-caret-up fa-xl"></i></div>
+          <div>
+            <p id="">Welcome</p>
+            <strong>{{welcomeUser}}</strong>
+            <hr>
+            <button (click)="toggleRotation('login')">{{ isLoginn ? 'Logout' : 'Login' }}</button>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+
+  </div>
+  <div class="sub-nav">
+    <ul>
+      <li (click)="toggleRotation('holidays')">
+        <span>
+          Holidays&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs"
+            [ngClass]="{'rotated': isRotated('holidays')}"></i>
+        </span>
+      </li>
+      <li (click)="toggleRotation('fixedDeparture')">
+        <span>
+          Fixed Departure&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs"
+            [ngClass]="{'rotated': isRotated('fixedDeparture')}"></i>
+        </span>
+      </li>
+      <li (click)="toggleRotation('customizedHolidays')">
+        <span>
+          Customized Holidays&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs"
+            [ngClass]="{'rotated': isRotated('customizedHolidays')}"></i>
+        </span>
+      </li>
+      <li (click)="toggleRotation('support')">
+        <span>
+          Support&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs" [ngClass]="{'rotated': isRotated('support')}"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+</header>

@@ -1,1 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    color-scheme: light;
+}
+:root {
+    --uv-styles-color-surface: #fff;
+    --uv-styles-color-footer: #f8f9fa;
+    --uv-styles-color-outline: #dadce0;
+    --uv-styles-color-icon-on-secondary: #70757a;
+    --uv-styles-color-scrim: #0009;
+    --uv-styles-color-on-scrim: #fff;
+    --uv-styles-color-icon-on-scrim: #fff;
+    --uv-styles-color-primary: #1a73e8;
+    --uv-styles-color-on-primary: #fff;
+    --uv-styles-color-secondary: #e8f0fe;
+    --uv-styles-color-on-secondary: #1558d6;
+    --uv-styles-color-on-tertiary: #202124;
+    --uv-styles-color-icon-on-tertiary: #9aa0a6;
+    --uv-styles-color-tertiary: #f1f3f4;
+    --uv-styles-color-text-primary: #1a73e8;
+    --uv-styles-color-text-emphasis: #202124;
+    --uv-styles-color-icon-emphasis: #202124;
+    --uv-styles-color-text-de-emphasis: #70757a;
+    --uv-styles-color-text-default: #3c4043;
+    --uv-styles-color-icon-default: #423c43;
+    --uv-styles-color-review-stars: #fbbc04;
+    --uv-styles-color-review-stars-empty: #dadce0;
+    --uv-styles-color-letterbox: #f1f3f4;
+}
+
+html,
+body {
+    overflow: visible;
+    }
+
+:root {
+    view-transition-name: root;
+}
+
+user agent stylesheet html {
+    display: block;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 1rem;
+    /* zoom: 99.95%; */
+}
+
+body,
+h1,
+h2,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

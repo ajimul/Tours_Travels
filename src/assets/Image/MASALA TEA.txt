@@ -1,0 +1,66 @@
+MASALA TEA || Premium CTC tea with exotic Indian spices
+
+Tea Origin     	: Darjeeling
+Tea Form	: Loose
+Specification	: Regular Tea with Masala
+Flavour		: Masala (Natural)
+Tea Type	: Regular Refreshing
+Package Type	: Pouch 
+Shelf Life	: 12 Months
+Net Quantity  	: 250 gm
+Added Extracts	: NA
+Ingredients	: CTC tea & Mix Masala
+Benefits 	: Strong Refreshing taste and helps to boost immunity and Digestion system.
+{
+    "productName": "MASALA TEA",
+    "productDesc": "Description of the product",
+    "productImgSrc": "MASALA TEA (1).jpeg",
+    "categoryDetails": [
+        {
+            "categoryName": "MASALA TEA A",
+            "stockQuantity": 10,
+            "categoryImgSrc": "MASALA TEA (1).jpeg",
+            "productDetailsName": "Darjeeling Tea",
+            "productDate": "2023-01-01",
+            "description": "Product  category description",
+            "ratingScore": 4.5,
+            "mRP": 19.99,
+            "price": 15.99,
+            "discount": 0.2,
+            "gST": 0.1,
+            "teaForm": "Loose",
+            "specification": "Regular Tea with Masala",
+            "flavour": "Masala (Natural)",
+            "teaType": "Regular Refreshing",
+            "packageType": "Pouch",
+            "shelfLife": "12 months",
+            "netQuantity": "250 gm",
+            "addedExtracts": "NA",
+            "grades": "Grade A",
+            "productClass": "Class 1",
+            "region": "Darjeeling",
+            "characteristics": "Tea",
+            "liquor": " category Liquor",
+            "useFor": "Tea Usage",
+            "inLoose": "Yes",
+            "loosePrice": 10.99,
+            "transportCharge": 5.0,
+            "looseMOQ": "5 kgs",
+            "ingredients":"CTC tea & Mix Masala",
+            "categoryDetailsImgSrc": [
+                {
+                    "cDetailsImgSrc": "MASALA TEA (1).jpeg"
+                },
+                {
+                    "cDetailsImgSrc": "MASALA TEA (2).jpeg"
+                },
+                {
+                    "cDetailsImgSrc": "MASALA TEA (3).jpeg"
+                },
+                {
+                    "cDetailsImgSrc": "MASALA TEA (4).jpeg"
+                }
+            ]
+        }
+    ]
+}

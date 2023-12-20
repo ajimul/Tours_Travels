@@ -1,0 +1,16 @@
+
+<div class="slider-container">
+    <div #slider class="slider" [style.transform]="'translateX(' + (-counter * 100) + '%)'">
+      <img *ngFor="let image of images" [src]="image.src" [alt]="image.alt">
+    </div>
+    <div class="indicators">
+      <div *ngFor="let image of images; let i = index" [class.active]="i === counter" (click)="goToSlide(i)"></div>
+    </div>
+    <button class="control-btn left" (click)="prevSlide()">
+      <i class="fas fa-chevron-left fa-xl" ></i>
+    </button>
+    <button class="control-btn right" (click)="nextSlide()">
+      <i class="fas fa-chevron-right fa-xl"></i>
+    </button>
+  </div>
+  
