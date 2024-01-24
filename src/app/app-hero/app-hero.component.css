@@ -1,69 +1,196 @@
-.slider-container {
-    position: relative;
-    overflow: hidden;
+/* page-container styles */
+.page-container {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  height: 550px;
+
+  }
+
+  .img {
+      width: 100%;
+      height: 500px;
+      /* border: 2px solid red; */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+  }
+
+
+.container {
+  overflow-x: scroll;
+  white-space: nowrap;
+  /* border: red solid; */
+}
+.cards {
+
+  display: flex;
+  transition: transform 0.3s ease;
+  /* border: rgb(0, 26, 255) solid; */
+
+}
+.card {
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(7, 7, 7, 0.61);
+  overflow: hidden;
+  transition: transform 0.3s;
+  margin-left: 20px;
+  margin-right: 20px;
+  flex: 0 0 300px; 
+  max-width: 260px;
+  height: 230px; 
+  border-radius: 8px;
+  background-color: #fff;
+}
+.card-content{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.card-title {
+ 
+  padding: 0;
+  margin: 0;
+  }
+.span-top{
+  position: absolute;
+  top: 1px;
+  left: 0px;
+  color: #ffffff;
+  background-color: #21222180;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  }
+.span-bottom{
+  font-size: 0.7rem;
+  }
+
+/* Card image styles */
+.card-img img {
+  width: 100%;
+  height: 150px; 
+  object-fit: cover;
 }
 
-.slider {
-    display: flex;
-    scroll-snap-type: x mandatory;
+/* Track */
+.cards-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
-
-.slider img {
-    width: 100%;
-    height: 350px;
-    flex-shrink: 0;
-    scroll-snap-align: start; 
-        object-fit: cover; 
-}
-
-.indicators {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    z-index: 99;
-    top: 80%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-}
-
-.indicators div {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #ccc;
-    margin: 0 5px;
+  
+  .card:hover {
+    transform: scale(0.9);
     cursor: pointer;
+  }
+  
+  
+  /* Card image styles */
+  .card-img img {
+    width: 100%;
+    height: 200px;
+    /* Adjust the height as needed */
+    object-fit: cover;
+  }
+    
+  /* Style the scrollbar */
+.container::-webkit-scrollbar {
+  height:0px; /* Set the height of the scrollbar */
+ cursor: pointer;
+}
+/* Handle on hover */
+.container::-webkit-scrollbar-thumb:hover {
+ background-color: #555;
+}
+/* Set scrollbar color */
+.container::-webkit-scrollbar-thumb {
+ background-color: #b4b4b4;
+ border-radius: 10px;
+}
+/* Track */
+.container::-webkit-scrollbar-track {
+ background: #f1f1f1;
+}
+ 
+ .card:hover {
+   transform: scale(0.9);
+   cursor: pointer;
+ }
+ /* Card image styles */
+ .card-img img {
+   width: 100%;
+   height: 200px;
+   /* Adjust the height as needed */
+   object-fit: cover;
+ }
+
+  
+ .color {
+   color: rgb(17, 161, 218);
+   font-weight: 600;
+ }
+
+
+
+.cards-container {
+   display: flex;
+   flex-wrap: nowrap;
+   overflow-x: scroll;
+}
+.navigation {
+  margin-top: 10px;
 }
 
-.indicators div.active {
-    background-color: #555;
-}
+.next,.pre {
+   transform: translateY(-50%);
+   background: none;
+   border: none;
+   font-size: 24px;
+   cursor: pointer;
+   z-index: 99;
+   color: #ffd700;
+   /* opacity: 0.6; */
+   
+ }
+ 
+ 
+ .pre {
+  position: absolute;
+  top: 50%;
+   left: 20px;
+   
+ }
+ 
+ .next {
+  position: absolute;
+  top: 50%;
+   right: 0;
+ }
 
-.control-btn {
+@media (max-width: 768px) {
+  .cards-container {
+    flex-wrap: wrap;
+    overflow-x: auto; /* Allow horizontal scrolling when screen size is small */
+    justify-content: flex-start; /* Align cards to the start */
+  }
+  
+  .card {
+    margin: 5px;
+    margin-right: 10px; /* Add some spacing between cards */
+  }
+
+  .container {
+    overflow-x: auto; /* Allow horizontal scrolling when screen size is small */
+  }
+
+  .navigation {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: rgb(80, 112, 104);
-    cursor: pointer;
-    opacity: 0.5;
-    z-index: 99;
+    width: 100%;
+    text-align: center;
   }
-  
-  .control-btn:hover {
-    opacity: 1;
-    color: rgb(95, 95, 95);
-  }
-  
-  .control-btn.left {
-    left: 0;
-  }
-  
-  .control-btn.right {
-    right: 0;
-  }
-  
+}

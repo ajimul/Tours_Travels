@@ -5,7 +5,7 @@
         <i class="fa-solid fa-bars fa-2xl"></i>
       </li>
       <li>
-        <a href="#"><img src="assets\Image\Logo-0.png" alt=""></a>
+        <a href="#"><img src="assets/Image/logo.png" alt="Image description" class="logo-img"></a>
       </li>
     </ul>
     <ul class="flex-center">
@@ -16,56 +16,47 @@
       </li>
     </ul>
     <ul class="flex-end">
-
       <li>
-        <span>
-          <i class="fa-solid fa-phone"></i></span>
-      </li>
 
-      <li class="nav-login">
-        <span id="btn-login">
-          <i class="fa-regular fa-user fa-lg">&nbsp;&nbsp;</i>
-          <ng-container *ngIf="isLoginn"> {{email}} </ng-container>
-        </span>
-        <div id="login-flyout">
-          <div><i class="fa-solid fa-caret-up fa-xl"></i></div>
-          <div>
-            <p id="">Welcome</p>
-            <strong>{{welcomeUser}}</strong>
-            <hr>
-            <button (click)="toggleRotation('login')">{{ isLoginn ? 'Logout' : 'Login' }}</button>
+        <div class="contact-main-container" #contactInfo>
+          <div class="contactInfo-container">
+            <div class="contactInfo-content" (click)="toggleClickEvent('contactInfo_flyout')">
+              <span class="contactInfo-btn"><i class="fa-solid fa-phone fa-lg"></i></span>
+            </div>
+            <div class="contactInfo-flyout-container" [ngClass]="{'contactInfo-visible': isContactFlyOut}">
+              <div class="contactInfo-btn-pointer"><i class="fa-solid fa-caret-up fa-xl"></i></div>
+              <div class="contactInfo-flyout-content">
+                <p id="">Welcome</p>
+                <strong>Contact Us &#64; +91 8906664868</strong>
+                <strong>Contact Us &#64; +91 9046293740</strong>
+                <hr>
+              </div>
+            </div>
           </div>
         </div>
+
+
+        <div class="login-main-container" #loginInfo>
+          <!-- <div class="login-container">
+            <div class="loginn-content" (click)="toggleClickEvent('login_flyout')">
+              <span class="btn-login"><i class="fa-regular fa-user fa-lg"></i>
+                <ng-container *ngIf="isLoginn"> {{email}} </ng-container>
+              </span>
+            </div>
+            <div class="flyout-container" [ngClass]="{'visible': isFlyOut}">
+              <div class="log-btn-pointer"><i class="fa-solid fa-caret-up fa-xl"></i></div>
+              <div class="flyout-content">
+                <p id="">Welcome</p>
+                <strong>{{welcomeUser}}</strong>
+                <hr>
+                <button (click)="toggleClickEvent('login')">{{ isLoginn ? 'Logout' : 'Login' }}</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
       </li>
-
     </ul>
-
   </div>
   <div class="sub-nav">
-    <ul>
-      <li (click)="toggleRotation('holidays')">
-        <span>
-          Holidays&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs"
-            [ngClass]="{'rotated': isRotated('holidays')}"></i>
-        </span>
-      </li>
-      <li (click)="toggleRotation('fixedDeparture')">
-        <span>
-          Fixed Departure&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs"
-            [ngClass]="{'rotated': isRotated('fixedDeparture')}"></i>
-        </span>
-      </li>
-      <li (click)="toggleRotation('customizedHolidays')">
-        <span>
-          Customized Holidays&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs"
-            [ngClass]="{'rotated': isRotated('customizedHolidays')}"></i>
-        </span>
-      </li>
-      <li (click)="toggleRotation('support')">
-        <span>
-          Support&nbsp;&nbsp;<i class="fa-solid fa-angle-down fa-xs" [ngClass]="{'rotated': isRotated('support')}"></i>
-        </span>
-      </li>
-    </ul>
-  </div>
+     </div>
 </header>

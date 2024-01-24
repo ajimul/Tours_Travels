@@ -11,11 +11,14 @@ platformId: Object;
     this.platformId = platformId;
   }
   currentUser$ = new BehaviorSubject<{ id: string; name: string } | null | undefined >(undefined);
-  setCurrentUser() {
+  initializeCurrentUser() {
     if (isPlatformBrowser(this.platformId) && localStorage.getItem('access_token')) {
       this.currentUser$.next({ id: '1', name: 'Foo' });
     } else {
       this.currentUser$.next(null);
     }
+  }
+  removeCurrentUser() {
+    this.currentUser$.next(null);
   }
 }

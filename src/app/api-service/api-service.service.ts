@@ -1,25 +1,34 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpEvent,
+  HttpHandler,
+  HttpHeaders,
+  HttpInterceptor,
+  HttpInterceptorFn,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment.development';
 // import { MyCard } from '../app.interface/share-interface';
-import { Observable } from 'rxjs';
-import { MyCard } from '../interfaces/share-interface';
+import { Observable, of } from 'rxjs';
+import { TokenService } from '../token-service/token.service';
+import { environment } from '../../environments/environment';
+import { Itinerary } from '../interfaces/share-interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   private apiServerUrl = environment.apiBaseUrl;
-  private uploadUrl = 'D:/Angular/e-commerce-admin-csr/src/assets/images';
   h: HttpHeaders = new HttpHeaders();
-  constructor(private http: HttpClient, private route: Router) {}
+  constructor(
+    private http: HttpClient,
+    private token:TokenService) {}
+    // const options = { headers: this.token.getHeadersWithAuthorization() };
 
   //----------------------------------------------LOGIN SERVICE------------------------------------------------------>
   loginn(loginForm: any) {
-    // const options = {
-    //   withCredentials: true
-    // };
 
     const token = localStorage.getItem('access_token');
     const _headers = new HttpHeaders({
@@ -32,30 +41,19 @@ export class ApiService {
     );
   }
   logout(): Observable<string> {
+    const options = { headers: this.token.getHeadersWithAuthorization() };
     const logoutUrl = `${this.apiServerUrl}v1/auth/logout`;
-    return this.http.post<string>(logoutUrl, null);
+    return this.http.post<string>(logoutUrl,options);
   }
-
-  async setMyCards(mycard: MyCard): Promise<MyCard | undefined> {
-    try {
-      const response = await this.http
-        .post<MyCard>(`${this.apiServerUrl}mycards`, mycard)
-        .toPromise();
-      return response;
-    } catch (error) {
-      console.error('Error in From-MyCards:', error);
-      throw error;
-    }
+  getAllItineraries(): Observable<Itinerary[]> {
+    return this.http.get<Itinerary[]>(`${this.apiServerUrl}itineraries`);
   }
   uploadFile(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
     return this.http.post<any>(`${this.apiServerUrl}image/upload`, formData);
   }
-
-
-  
-  getMyCardsByClientRefId(clientRefId: number): Observable<MyCard[]> {
-    return this.http.get<MyCard[]>(`${this.apiServerUrl}mycards/byClientRefId/${1}`);
+  getHeroBackgroundImageUrl(): Observable<string> {
+    return of('/assets/Image/winter.jpg');
   }
 }

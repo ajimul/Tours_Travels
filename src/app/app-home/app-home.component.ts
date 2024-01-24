@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AppNavbarComponent } from "../app-navbar/app-navbar.component";
 import { AppSitemapComponent } from "../app-sitemap/app-sitemap.component";
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AppPagesDefaultComponent } from "../app-pages-default/app-pages-default.component";
-
+import { Routes } from '@angular/router';
 @Component({
     selector: 'app-app-home',
     standalone: true,
@@ -12,5 +12,10 @@ import { AppPagesDefaultComponent } from "../app-pages-default/app-pages-default
     imports: [AppNavbarComponent, AppSitemapComponent, RouterOutlet, AppPagesDefaultComponent]
 })
 export class AppHomeComponent {
+    constructor(private route: Router,){
 
+    }
+    gotoLoginn(){
+this.route.navigate(['test-login'])
+    }
 }

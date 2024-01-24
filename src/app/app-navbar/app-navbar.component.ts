@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CardValueService } from '../share-data/card-value.service';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 
 import { ApiService } from '../api-service/api-service.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { AppLoginComponent } from '../app-login/app-login.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -23,80 +28,62 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './app-navbar.component.css',
 })
 export class AppNavbarComponent implements OnInit {
+  @ViewChild('contactInfo') contactInfo: ElementRef;
+  @ViewChild('loginInfo') loginInfo: ElementRef;
+
+  xxx: boolean = true;
   isLoginn: boolean = false;
   // isLoginn: boolean = true;
   email: any = '';
   welcomeUser: any = 'Guest!';
-  
-  rotatedItems: { [key: string]: boolean } = {};
+
+  toggleItems: { [key: string]: boolean } = {};
+  isFlyOut: boolean = false;
+  isContactFlyOut: boolean = false;
 
   constructor(
     private route: Router,
-    private cardValue: CardValueService,
     private apiService: ApiService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+  ) {
+    this.contactInfo = {} as ElementRef;
+    this.loginInfo = {} as ElementRef;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
 
-  toggleRotation(item: string): void {
-    console.log(this.rotatedItems[item]);
-    this.rotatedItems[item] = !this.rotatedItems[item];
+  }
+
+  toggleClickEvent(item: string): void {
+    this.toggleItems[item] = !this.toggleItems[item];
     this.handleItemClick(item);
   }
 
   isRotated(item: string): boolean {
-    return this.rotatedItems[item];
+    return this.toggleItems[item];
   }
 
   handleItemClick(item: string): void {
     switch (item) {
-      case 'login':
-        if (!this.isLoginn) {
-          this.openLoginDialog();
+      case 'contactInfo_flyout':
+        this.isFlyOut = false;
+        if (!this.isContactFlyOut) {
+          this.isContactFlyOut = true;
         } else {
-          this.logOut();
+          this.isContactFlyOut = false;
         }
-        break;
-      case 'holidays':
-        break;
-      case 'fixedDeparture':
-        break;
-      case 'customizedHolidays':
-        break;
-      case 'support':
         break;
     }
   }
 
-  openLoginDialog() {
-    const dialogRef = this.dialog.open(AppLoginComponent, {
-      width: '29%',
-      height: '50%',
-      data: [],
-    });
-
-    dialogRef.afterClosed().subscribe({
-      next: (data) => {
-        this.email = data.email;
-        this.welcomeUser = data.email + '!';
-        this.isLoginn = true;
-      },
-      error: (e) => {
-        this.isLoginn = false;
-      },
-      complete: () => {},
-    });
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: any): void {
+    const contactInfo = this.contactInfo?.nativeElement;
+      if (contactInfo &&!contactInfo.contains(event.target)) {
+      this.isFlyOut = false;
+      this.isContactFlyOut = false;
+    }
   }
-  logOut() {
-    this.apiService.logout().subscribe({
-      next: (value) => {
-        this.welcomeUser = 'Guest!';
-        this.isLoginn = false;
-        this.email=null;
-      },
-      error: (e) => {},
-      complete: () => {},
-    });
-  }
+  
+  
 }

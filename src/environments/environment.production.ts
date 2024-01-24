@@ -1,11 +1,8 @@
 
-export const environment = {
-    // production: false
+
+
+    export const environment = {
+      production: true,
+      apiBaseUrl :'https://ecotusholidays.com/api/'
+         };
   
-    
-    production: true,
-    // apiBaseUrl: 'https://localhost:8009/api/'
-    apiBaseUrl: 'http://localhost:8080/api/'
-    // apiBaseUrl: 'https://spotsolution.store'
-    
-  };

@@ -1,0 +1,20 @@
+<!-- <p>app-itinerary-list works!</p> -->
+<h1>{{cardListTitle}}</h1>
+
+<div class="cards-container">
+      <div class="cards" #cards>
+        <div *ngFor="let card of (itineraries$ | async) as itinerarys; let i = index" class="card">
+          <div class="card-content">
+            <div class="card-title">
+              <span class="span-top">&nbsp;{{ card.title }}&nbsp;</span>
+            </div>
+            <div class="card-img">
+              <img [src]="basePath + card.imgSrc" alt="Coming Soon!">
+            </div>
+          </div>
+          <span class="span-bottom">&nbsp;{{ card.tourName }}&nbsp;</span>
+        </div>
+      </div>
+  <div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
-import { CategoryDetails, ProductDTO } from '../interfaces/share-interface';
 import { AppHeroComponent } from "../app-hero/app-hero.component";
+import { AppItineraryListComponent } from "../app-itinerary-list/app-itinerary-list.component";
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 
 @Component({
@@ -8,34 +9,29 @@ import { AppHeroComponent } from "../app-hero/app-hero.component";
     standalone: true,
     templateUrl: './app-pages-default.component.html',
     styleUrl: './app-pages-default.component.css',
-    imports: [AppHeroComponent]
+    imports: [AppHeroComponent, AppItineraryListComponent,]
 })
 export class AppPagesDefaultComponent {
-  // @Output() addCardClicked: EventEmitter<CategoryDetails> = new EventEmitter<CategoryDetails>();
-  // requestCard?: ProductDTO;
-  // categoryDetails: CategoryDetails[] = [];
-  // constructor(private cd: ChangeDetectorRef) {
+constructor(
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private router: Router) {
 
-  // }
-
-
-  onCardClicked(CardList: CategoryDetails) {
   }
-  // onCategoryClicked(productDTO: ProductDTO) {
-    
-  //   this.requestCard = {
-  //     productId: 0,
-  //     productName: '',
-  //     productDesc: '',
-  //     productImgSrc: ''
-  //   };
-  //   this.requestCard =productDTO;
+
+
  
-  // }
-  // addToMyCard(CardList: CategoryDetails) {
-  //      this.addCardClicked.emit(CardList);
-  // }
+  
   ngOnInit() {
+    this.route.url.subscribe(segments => {
+      console.log('Current URL segments:', segments);
+    });
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Do something when navigation ends
+        console.log('Navigation ended:', event);
+      }
+    });
   }
   
 }

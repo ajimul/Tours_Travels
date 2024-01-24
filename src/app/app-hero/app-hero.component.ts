@@ -12,8 +12,12 @@ import {
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { interval } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Itinerary } from '../interfaces/share-interface';
+import { ApiService } from '../api-service/api-service.service';
+import { ItinerariesCardService } from '../share-data/itineraries-card.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-hero',
@@ -22,93 +26,75 @@ import { take } from 'rxjs/operators';
   templateUrl: './app-hero.component.html',
   styleUrl: './app-hero.component.css',
 })
-export class AppHeroComponent implements OnInit {
-  @ViewChild('slider') sliderx: ElementRef | undefined;
-  @ViewChildren('.indicators div') indicators:
-    | QueryList<ElementRef>
-    | undefined;
-  images = [
-    { src: 'assets/Image/Hero image (1).jpg', alt: 'Image 1' },
-    { src: 'assets/Image/Hero image (2).jpg', alt: 'Image 2' },
-    { src: 'assets/Image/Hero image (3).jpg', alt: 'Image 3' },
-    { src: 'assets/Image/Hero image (4).jpg', alt: 'Image 4' },
-    { src: 'assets/Image/Hero image (5).jpg', alt: 'Image 5' },
-    { src: 'assets/Image/Hero image (6).jpg', alt: 'Image 6' },
-  ];
+export class AppHeroComponent implements OnInit{
 
-  counter = 0;
-  isDragging = false;
-  dragStartX: number = 0;
-  dragEndX: number = 0;
-  constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef) {}
+  imageUrl: Observable<string> | undefined;
+  basePath: string = 'assets/Image/';
+  title = 'card-sliding';
+  itineraries$: Observable<Itinerary[]> = this.itineraryService.itinerariesCardData$;
+
+  @ViewChild('container') container!: ElementRef;
+  @ViewChild('cards') cards!: ElementRef;
+  currentIndex: number = 0;
+  cardWidth: number = 0; // Initialize to 0
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private apiService: ApiService,
+    private itineraryService: ItinerariesCardService,private router:Router) {
+    this.imageUrl = this.apiService.getHeroBackgroundImageUrl();
+    this.itineraries$ = this.getItineraries();//get data from api call and set data to observable!
+  }
+
   ngOnInit() {
-    this.ngZone.runOutsideAngular(() => {
-      const timer$ = interval(6000);
-      timer$.pipe(take(10)).subscribe(() => {
-        this.nextSlide();
+    this.itineraryService.getAndSetItineraries();
+  }
+
+  ngAfterViewInit() {
+    this.itineraries$.subscribe({
+      next: (value) => {
+        this.calculateContainerWidth(value);
+        this.updateCardContainer();
         this.cdr.detectChanges();
-      });
+      },
+      error: (e) => console.error(e),
     });
   }
 
-  nextSlide() {
-    this.counter++;
-    if (this.counter === this.images.length) {
-      this.counter = 0;
+  getItineraries(): Observable<Itinerary[]> {
+    return this.apiService.getAllItineraries();
+  }
+
+  calculateContainerWidth(itineraries: Itinerary[]) {
+    const totalWidth = itineraries.reduce((acc, card) => {
+      return acc + 300; // Change 300 to the actual width of your cards
+    }, 0);
+
+    this.container.nativeElement.style.width = `${totalWidth}px`;
+    this.cardWidth = 300; // Change 300 to the actual width of your cards
+  }
+
+  prev() {
+    if (this.currentIndex > 0) {
+      this.currentIndex -= 1;
+      this.updateCardContainer();
     }
   }
 
-  prevSlide() {
-    this.counter--;
-    if (this.counter < 0) {
-      this.counter = this.images.length - 1;
-    }
+  next() {
+    this.itineraries$.subscribe(itineraries => {
+      if (this.currentIndex < itineraries.length - 1) {
+        this.currentIndex += 1;
+        this.updateCardContainer();
+      }
+    });
   }
 
-  goToSlide(index: number) {
-    this.counter = index;
-
-    if (this.indicators && this.indicators.length > index) {
-      const indicatorElement = this.indicators.toArray()[index]
-        .nativeElement as HTMLElement;
-      indicatorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+  updateCardContainer() {
+    const cards = this.cards.nativeElement;
+    const transformValue = -this.currentIndex * this.cardWidth;
+    const transformStyle = `translateX(${transformValue}px)`;
+    cards.style.transform = transformStyle;
   }
-
-  @HostListener('document:mousedown', ['$event'])
-  onMouseDown(event: MouseEvent) {
-    this.isDragging = true;
-    this.dragStartX = event.clientX;
-  }
-
-  @HostListener('document:mouseup', ['$event'])
-  onMouseUp(event: MouseEvent) {
-    if (this.isDragging) {
-      this.dragEndX = event.clientX;
-      this.handleDrag();
-      this.isDragging = false;
-    }
-  }
-
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event: MouseEvent) {
-    if (this.isDragging) {
-      this.dragEndX = event.clientX;
-      this.handleDrag();
-    }
-  }
-
-  private handleDrag() {
-    const dragDistance = this.dragEndX - this.dragStartX;
-    const slideWidth = 100 / this.images.length;
-    const dragPercentage = (dragDistance / window.innerWidth) * 100;
-
-    if (dragPercentage > 10) {
-      this.prevSlide();
-    } else if (dragPercentage < -10) {
-      this.nextSlide();
-    }
-    // Reset drag start position
-    this.dragStartX = this.dragEndX;
-  }
+  navigation() {
+    this.router.navigate(['/home/nav']);    }
 }

@@ -1,4 +1,3 @@
-
 input,
 select,
 button {
@@ -20,14 +19,15 @@ li {
   border: solid hsla(0, 0%, 22%, 0.575) 0.5px;
 }
 
-/* Navbar Styles */ 
-/* Navbar Styles */ 
-/* Navbar Styles */ 
+/* Navbar Styles */
+/* Navbar Styles */
+/* Navbar Styles */
 .first-nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  height: auto;
   gap: 0px;
   background-color: rgb(250, 246, 237);
 }
@@ -98,9 +98,13 @@ li {
   justify-content: flex-end;
 }
 
-.flex-start,
+.flex-start{
+  min-height: 80px;
+  flex: 1 1 30%;
+}
+
 .flex-end {
-  flex: 1 1 25%;
+  flex: 1 1 20%;
 }
 
 .flex-center {
@@ -122,7 +126,7 @@ li {
 }
 
 .flex-start > li:nth-child(2):hover {
-  zoom: 120%;
+  /* zoom: 120%; */
   filter: brightness(110%);
   cursor: pointer;
 }
@@ -132,6 +136,13 @@ li {
   cursor: pointer;
   border: solid hwb(123 1% 35% / 0.575) 0.5px;
   background-color: #ffffff;
+}
+
+.logo-img{
+  
+  width: 150px;
+  /* filter: hue-rotate(170deg); */
+  
 }
 
 /* Child Flex of .flex-center */
@@ -179,78 +190,234 @@ li {
   background-color: #ffffff;
 }
 
-/* Login Flyout Styles*/
-/* Login Flyout Styles*/
-/* Login Flyout Styles*/
-#login-flyout {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  display: none;
-  gap: 0.5px;
-  text-align: center;
+/* contactInfo Flyout Styles*/
+/* contactInfo Flyout Styles*/
+/* contactInfo Flyout Styles*/
+.contactInfo-container {
+  display: flex;
+  width: auto;
+  height: 48px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.contactInfo-content {
+  position: relative;
+  display: flex;
+  height: 44px;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 150px;
-  background-color: #ffffff;
-  z-index: 99;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 20px;
-  border: solid 0.5px hsla(143, 11%, 32%, 0.233);
 }
 
-#login-flyout > div:nth-child(1) {
-  position: absolute;
-  top: -3px;
-  right: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  z-index: 100;
-}
-
-#login-flyout > div:nth-child(1) i {
-  color: #ffae00;
-}
-
-#login-flyout > div:nth-child(2) {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 5px;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-#login-flyout > div:nth-child(2) hr {
-  width: 100%;
-}
-
-#login-flyout > div:nth-child(2) button {
-  display: inline-block;
-  background-color: #4caf50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+.contactInfo-content:hover {
   cursor: pointer;
-  font-size: 16px;
 }
 
-#login-flyout > div:nth-child(2) button:hover {
-  background-color: #45a049;
+.contactInfo-btn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 80px;
+  border: solid hsla(203, 11%, 32%, 0.233) 0.5px;
+  background-color: rgb(235, 235, 235);
+  margin: 0;
+  padding: 0;
 }
 
-#login-flyout {
+.contactInfo-btn > i {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  color: #f9b117;
+}
+
+/* flyout-container styles */
+
+.contactInfo-flyout-container {
+  position: absolute;
+  top: 58px;
+  z-index: 100;
   display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 8%;
+  /* border: solid hsla(203, 11%, 32%, 0.233) 0.5px; */
+  gap: 10px; 
+  right: 5px;
 }
 
-.nav-login:hover #btn-login + #login-flyout {
+.contactInfo-btn-pointer {
+  position: absolute;
+  top: 1px;
+  display: flex;
+  flex-wrap: nowrap;
+  right:43px;
+  color: #ffffff;
+}
+
+.contactInfo-flyout-content {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 300px;
+  height: 250px;
+  border: solid hsla(203, 11%, 32%, 0.233) 0.5px;
+  border-radius: 8%;
+}
+
+.contactInfo-flyout-content p,
+.contactInfo-flyout-content strong,
+.contactInfo-flyout-content button {
+  margin: 5px 0; 
+}
+
+.contactInfo-flyout-content > hr {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.contactInfo-flyout-content > button {
+  width: 80px;
+  height: 30px;
+  background-color: darkgreen;
+  color: #ffffff;
+  outline: none;
+  border: solid hsla(203, 11%, 32%, 0.233) 0.5px;
+}
+.contactInfo-btn:hover{
+  cursor: pointer;
+  border: solid hsla(123, 96%, 33%, 0.575) 0.5px;
+  background-color: #ffffff;
+}
+.contactInfo-visible {
   display: flex;
 }
+
+/* Login Flyout Styles*/
+/* Login Flyout Styles*/
+/* Login Flyout Styles*/
+.login-container {
+  display: flex;
+  width: auto;
+  height: 48px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.loginn-content {
+  position: relative;
+  display: flex;
+  height: 44px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginn-content:hover {
+  cursor: pointer;
+}
+
+.btn-login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 80px;
+  border: solid hsla(203, 11%, 32%, 0.233) 0.5px;
+  background-color: rgb(235, 235, 235);
+  margin: 0;
+  padding: 0;
+}
+
+.btn-login > i {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  color: #f9b117;
+}
+
+/* flyout-container styles */
+
+.flyout-container {
+  position: absolute;
+  top: 58px;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 8%;
+  /* border: solid hsla(203, 11%, 32%, 0.233) 0.5px; */
+  gap: 10px; 
+}
+
+.log-btn-pointer {
+  position: absolute;
+  top: -1px;
+  display: flex;
+  flex-wrap: nowrap;
+  right: 15px;
+  color: #ffffff;}
+
+.flyout-content {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 300px;
+  height: 250px;
+  border: solid hsla(203, 11%, 32%, 0.233) 0.5px;
+  border-radius: 8%;
+}
+
+.flyout-content p,
+.flyout-content strong,
+.flyout-content button {
+  margin: 5px 0; 
+}
+
+.flyout-content > hr {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.flyout-content > button {
+  width: 80px;
+  height: 30px;
+  background-color: darkgreen;
+  color: #ffffff;
+  outline: none;
+  border: solid hsla(203, 11%, 32%, 0.233) 0.5px;
+}
+.btn-login:hover{
+  cursor: pointer;
+  border: solid hsla(123, 96%, 33%, 0.575) 0.5px;
+  background-color: #ffffff;
+}
+.visible {
+  display: flex;
+}
+
 /* Child Flex of .flex-end */
 /* Child Flex of .flex-end */
 /* Child Flex of .flex-end */
@@ -261,7 +428,7 @@ li {
   justify-content: flex-end;
   width: 55px;
   height: 44px;
-  gap: 0.5px;
+  gap: 25px;
   text-align: center;
 }
 
@@ -287,26 +454,20 @@ li {
   background-color: #ffffff;
 }
 
-.flex-end > li:nth-child(2) {
-  position: relative;
-  display: flex;
-  flex: 1 1 50%;
-  gap: 0.5px;
-  text-align: center;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.flex-end > li:nth-child(2) > span {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  min-width: 44px;
-  height: 44px;
-  border: solid hsla(143, 11%, 32%, 0.233) 0.5px;
-  padding-left: 10px;
+/* Sub-Nav Menue Items Styles Design */
+/* Sub-Nav Menue Items Styles Design */
+/* Sub-Nav Menue Items Styles Design */
+.holi-menue{
+  display: flex; 
+  width: 250px;
+  height: 300px;
+  flex-wrap: nowrap; 
+  flex-direction: column; 
+  margin: 0; 
+  padding: 0; 
+  z-index: 200; 
+  background-color: antiquewhite;
+        
 }
 
 /* Responsive Design */
@@ -320,4 +481,13 @@ li {
   .flex-end {
     order: 2;
   }
+}
+.imageee {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  height: 550px;
+  background-size: cover; /* Optional: Adjust the background size */
+  background-position: center; /* Optional: Adjust the background position */
 }
