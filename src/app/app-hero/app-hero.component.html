@@ -1,22 +1,19 @@
-<button (click)="navigation()">Navigation</button>
 <section class="page-container img"
   [style.background-image]="(imageUrl | async) ? 'url(' + (imageUrl | async) + ')' : ''">
 
   <div class="container" #container>
-    <div class="cards" #cards>
-      <!-- ... -->
-      <div *ngFor="let card of (itineraries$ | async) as itinerarys; let i = index" class="card">
-        <div class="card-content">
-          <div class="card-title">
-            <span class="span-top">&nbsp;{{ card.title }}&nbsp;</span>
+    <div class="cards" #cards *ngIf="itineraryList$ | async as itineraryList">
+        <div *ngFor="let itinerary of itineraryList[0].itinerary; let i = index" class="card">
+          <div class="card-content">
+            <div class="card-title">
+              <span class="span-top">&nbsp;{{ itinerary.title }}&nbsp;</span>
+            </div>
+            <div class="card-img">
+              <img [src]="apiServerUrl + 'image/' + itinerary.imgSrc" alt={{itinerary.imgSrc}}>
+            </div>
           </div>
-          <div class="card-img">
-            <img [src]="basePath + card.imgSrc" alt="Coming Soon!">
-          </div>
+          <span class="span-bottom">&nbsp;{{ itinerary.tourName }}&nbsp;</span>
         </div>
-        <span class="span-bottom">&nbsp;{{ card.tourName }}&nbsp;</span>
-      </div>
-      <!-- ... -->
     </div>
     <div class="navigation">
       <button class="pre" (click)="prev()"><i class="fas fa-chevron-left fa-xl"></i></button>

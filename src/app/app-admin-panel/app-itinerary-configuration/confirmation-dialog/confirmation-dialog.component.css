@@ -1,0 +1,48 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #fff;
+    width: 400px;
+  }
+  
+  .card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .card-content {
+    margin-bottom: 20px;
+  }
+  
+   
+  
+  
+  .card-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .card-actions button {
+    margin-left: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+  }
+  
+ .cancel-btn {
+    background-color: #64b5f6; 
+    color: white;
+  }
+  
+.delete-btn {
+    background-color: #ef5350;
+    color: white; 
+  }
+.delete-btn:hover {
+    background-color: #ff0400;
+  }
+  .cancel-btn:hover{
+    background-color: #0087f5;
+  }
+  

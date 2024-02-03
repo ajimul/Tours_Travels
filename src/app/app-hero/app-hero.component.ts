@@ -14,24 +14,28 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Observable, interval } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { Itinerary } from '../interfaces/share-interface';
+import { Itinerary, ItineraryList } from '../interfaces/share-interface';
 import { ApiService } from '../api-service/api-service.service';
-import { ItinerariesCardService } from '../share-data/itineraries-card.service';
 import { Route, Router } from '@angular/router';
+import { ItinerariesAllCardService } from '../share-data/itineraries-all-card.service';
+import { environment } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-app-hero',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule ],
   templateUrl: './app-hero.component.html',
   styleUrl: './app-hero.component.css',
 })
 export class AppHeroComponent implements OnInit{
 
   imageUrl: Observable<string> | undefined;
-  basePath: string = 'assets/Image/';
+
+   apiServerUrl = environment.apiBaseUrl;
+
   title = 'card-sliding';
-  itineraries$: Observable<Itinerary[]> = this.itineraryService.itinerariesCardData$;
+  itineraryList$: Observable<ItineraryList[]> = this.itineraryService.itinerariesCardData$;
 
   @ViewChild('container') container!: ElementRef;
   @ViewChild('cards') cards!: ElementRef;
@@ -40,28 +44,48 @@ export class AppHeroComponent implements OnInit{
   constructor(
     private cdr: ChangeDetectorRef,
     private apiService: ApiService,
-    private itineraryService: ItinerariesCardService,private router:Router) {
+    private itineraryService: ItinerariesAllCardService,private router:Router,
+    private ngZone: NgZone
+    ) {
     this.imageUrl = this.apiService.getHeroBackgroundImageUrl();
-    this.itineraries$ = this.getItineraries();//get data from api call and set data to observable!
-  }
+    this.itineraryList$ = this.getItineraries();//get data from api call and set data to observable!
 
+  }
+  imageBlob?: Blob;
+  imageTest?: string;
   ngOnInit() {
     this.itineraryService.getAndSetItineraries();
+    
+    this.apiService.getImage('demo (2).jpg').subscribe(
+      (blob: Blob) => {
+        this.imageBlob = blob;
+        this.createImageUrl();
+      },
+      (error) => {
+        console.error('Error fetching image:', error);
+      }
+    );
   }
-
+      
+  createImageUrl(): void {
+    if (this.imageBlob) {
+      this.imageTest = URL.createObjectURL(this.imageBlob);
+    }
+  }
   ngAfterViewInit() {
-    this.itineraries$.subscribe({
+    this.itineraryList$.subscribe({
       next: (value) => {
-        this.calculateContainerWidth(value);
+        this.calculateContainerWidth(value[0].itinerary);
         this.updateCardContainer();
         this.cdr.detectChanges();
       },
       error: (e) => console.error(e),
     });
+ 
   }
 
-  getItineraries(): Observable<Itinerary[]> {
-    return this.apiService.getAllItineraries();
+  getItineraries(): Observable<ItineraryList[]> {
+    return this.apiService.getAllItineraryLists();
   }
 
   calculateContainerWidth(itineraries: Itinerary[]) {
@@ -81,8 +105,8 @@ export class AppHeroComponent implements OnInit{
   }
 
   next() {
-    this.itineraries$.subscribe(itineraries => {
-      if (this.currentIndex < itineraries.length - 1) {
+    this.itineraryList$.subscribe(itinerariesList => {
+      if (this.currentIndex < itinerariesList.length - 1) {
         this.currentIndex += 1;
         this.updateCardContainer();
       }
@@ -95,6 +119,4 @@ export class AppHeroComponent implements OnInit{
     const transformStyle = `translateX(${transformValue}px)`;
     cards.style.transform = transformStyle;
   }
-  navigation() {
-    this.router.navigate(['/home/nav']);    }
 }

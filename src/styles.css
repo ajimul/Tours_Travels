@@ -36,7 +36,11 @@ body {
 :root {
     view-transition-name: root;
 }
-
+.error-message {
+    color: red;
+    margin-top: -8px;
+    margin-bottom: 12px;
+  }
 user agent stylesheet html {
     display: block;
 }

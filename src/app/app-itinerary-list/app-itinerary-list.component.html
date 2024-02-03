@@ -2,17 +2,17 @@
 <h1>{{cardListTitle}}</h1>
 
 <div class="cards-container">
-      <div class="cards" #cards>
-        <div *ngFor="let card of (itineraries$ | async) as itinerarys; let i = index" class="card">
+      <div class="cards" #cards *ngIf="itineraryList$ | async as itineraryList">
+          <div *ngFor="let itinerary of itineraryList[1].itinerary; let i = index" class="card">
           <div class="card-content">
             <div class="card-title">
-              <span class="span-top">&nbsp;{{ card.title }}&nbsp;</span>
+              <span class="span-top">&nbsp;{{itinerary.title }}&nbsp;</span>
             </div>
             <div class="card-img">
-              <img [src]="basePath + card.imgSrc" alt="Coming Soon!">
+              <img [src]="apiServerUrl + 'image/' + itinerary.imgSrc" alt="Coming Soon!">
             </div>
           </div>
-          <span class="span-bottom">&nbsp;{{ card.tourName }}&nbsp;</span>
+          <span class="span-bottom">&nbsp;{{ itinerary.tourName }}&nbsp;</span>
         </div>
       </div>
   <div>

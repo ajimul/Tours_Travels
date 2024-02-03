@@ -12,11 +12,22 @@ export class guardGuard implements CanActivate {
     return this.authService.currentUser$.pipe(
       map((user) => {
         if (!user) {
-          this.route.navigateByUrl('/');
+          this.route.navigateByUrl('login');
           return false;
         }
         return true;
       })
     );
+  }
+   generateRandomString(): string {
+    // Implement your logic to generate a random string here
+    // Example implementation:
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const length = 10;
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
   }
 }

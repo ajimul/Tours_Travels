@@ -1,0 +1,74 @@
+<main>
+    <header class="bg">
+        <div>
+            <h2 style="color: gold;">Itinerary-Configuration Works!</h2>
+        </div>
+    </header>
+
+    <!-- itinerary table-->
+    <div class="container bg">
+
+        <div class="action-container">
+            <div class="search-bar">
+                <label for="search">Select The Group
+                    <select *ngIf="itineraryGroupList$ | async as lists" style="width: 200px;"
+                        (change)="getItinerary($event)">
+                        <option value="default">--</option>
+                        <option *ngFor="let list of lists" [value]="list.itineraryGroupName">
+                            {{ list.itineraryGroupName }}
+                        </option>
+                        <option value="add-group" style="color: rgb(0, 119, 255);">* Create New Group</option>
+                    </select>
+                </label>
+            </div>
+            <div class="create-itinerary">
+                <button type="button" (click)="openDialogCreateItinerary()" class="create-btn">
+                    <strong>Create New</strong></button>
+            </div>
+        </div>
+
+        <div>
+            <hr>
+        </div>
+
+        <table mat-table matSort [dataSource]="itineraryDataSource" class="tbl-itinerary bg">
+            <ng-container matColumnDef="imgSrc">
+                <th mat-header-cell *matHeaderCellDef><strong>Iti-Images</strong></th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                   <img [src]="apiServerUrl + 'image/' + element.imgSrc" alt="Itinerary Image" style="width: 100px; height: 60px;">
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef><strong>Title</strong></th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                    <strong>{{element.title}}</strong>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="location">
+                <th mat-header-cell *matHeaderCellDef><strong>Location</strong></th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                    <strong>{{element.location}}</strong>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="tourName">
+                <th mat-header-cell *matHeaderCellDef><strong>Tours Name</strong></th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                    <strong>{{element.tourName}}</strong>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="deleteAction">
+                <th mat-header-cell *matHeaderCellDef><strong>Delete</strong></th>
+                <td mat-cell *matCellDef="let element;">
+                    <button (click)="openDialogDeleteItinerary(element.itineraryId,element.imgSrc)" class="del-btn">Delete</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="itineraryTableColumns"></tr>
+            <tr mat-row (click)="clickedRowsItinerary.add(row)"
+                [class.demo-row-is-clicked]="clickedRowsItinerary.has(row)"
+                *matRowDef="let row; columns: itineraryTableColumns;">
+            </tr>
+        </table>
+    </div>
+</main>

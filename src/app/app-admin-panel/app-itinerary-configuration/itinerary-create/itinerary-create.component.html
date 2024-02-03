@@ -1,0 +1,122 @@
+<main>
+    <header>
+        <button type="button" (click)="dialogClose()" class="close-btn">X</button>
+    </header>
+    <div>
+        <fieldset class="fieldset-root">
+            <legend>Create Itinerary Works!</legend>
+            <div class="bg">
+                <form [formGroup]="itineraryGroupForm">
+                    <fieldset class="fieldset-group">
+                        <legend>Select Under The Group Of Itinerary</legend>
+                        <label for="search">Select The Group
+                            <span *ngIf="itineraryGroupForm.get('itineraryGroupSelection')?.invalid"
+                                class="error-message">
+                                {{ getErrorMessageSelect('itineraryGroupSelection') }}
+                            </span>
+                            <select id="itineraryGroupSelection" name="itineraryGroupSelection"
+                                formControlName="itineraryGroupSelection" *ngIf="itineraryGroupList$ | async as lists"
+                                style="width: 200px;" (change)="findItineraryRefId($event)">
+                                <option value="default">--</option>
+                                <option *ngFor="let list of lists" [value]="list.itineraryGroupName">
+                                    {{ list.itineraryGroupName }}
+                                </option>
+                            </select>
+                        </label>
+                        <label for="fileSelect" class="file-select-label">Select image
+                            <span *ngIf="itineraryGroupForm.get('fileSelect')?.invalid || itineraryGroupForm.get('fileSelect')?.touched" class="error-message">
+                                {{ getErrorMessageFile('fileSelect') }}
+                            </span>
+                            <input type="file" formControlName="fileSelect" (change)="onFileSelected($event)">
+                        </label>
+                    </fieldset>
+                </form>
+            </div>
+            
+            <form [formGroup]="itineraryForm" (ngSubmit)="formSubmit()">
+
+
+                <div class="bg">
+                    <fieldset class="fieldset-group">
+                        <legend>Itinerary details</legend>
+                        <label for="tourName">
+                            Enter Name Of Tour:
+                            <span *ngIf="itineraryForm.get('tourName')?.invalid" class="error-message">
+                                {{ getErrorMessageText1('tourName') }}
+                            </span>
+                            <input class="boarder-bottom boarder-roun" id="tourName" name="tourName" type="text"
+                                formControlName="tourName" />
+                        </label>
+                        <label for="title">
+                            Enter Title Of Tour:
+                            <span *ngIf="itineraryForm.get('title')?.invalid" class="error-message">
+                                {{ getErrorMessageText1('title') }}
+                            </span>
+                            <input class="boarder-bottom boarder-roun" id="title" name="title" type="text"
+                                formControlName="title" />
+                        </label>
+                        <label for="tourImg">
+                            Image Of Tour :
+                            <span *ngIf="itineraryForm.get('imgSrc')?.invalid" class="error-message">
+                                {{ getErrorMessageText1('imgSrc') }}
+                            </span>
+                           
+                            <input class="boarder-bottom boarder-roun" id="tourImg" name="imgSrc" type="text" formControlName="imgSrc" readonly />
+                                <!-- [(ngModel)]="tourImgSrc"  -->
+                        </label>
+
+                        <label for="location">Tour Location:<input class="boarder-bottom boarder-roun" id="location"
+                                name="location" type="text" formControlName="location" />
+                        </label>
+                        <label for="callToAction">Sales Manager Contact No.:<input class="boarder-bottom boarder-roun"
+                                id="callToAction" name="callToAction" type="text" formControlName="callToAction" />
+                        </label>
+                        <label for="duration">Enter Tour Duration:<input class="boarder-bottom boarder-roun"
+                                id="duration" name="duration" type="text" formControlName="duration" />
+                        </label>
+                        <label for="travelDate">Select Date:<input class="boarder-bottom boarder-roun" id="travelDate"
+                                name="travelDate" type="date" formControlName="travelDate" />
+                        </label>
+                        <label for="rating">Set Tour Rating:<input class="boarder-bottom boarder-roun" id="rating"
+                                name="rating" type="number" formControlName="rating" />
+                        </label>
+                        <label for="tourPackageAmount">Enter Amount Of Package:<input
+                                class="boarder-bottom boarder-roun" id="rating" name="tourPackageAmount" type="number"
+                                formControlName="tourPackageAmount" />
+                        </label>
+                        <label for="tourPackageDiscount">Enter Discount Amount:<input
+                                class="boarder-bottom boarder-roun" id="rating" name="tourPackageDiscount" type="number"
+                                formControlName="tourPackageDiscount" />
+                        </label>
+                        <label for="tourTradingAmount">Enter Trading Amount:<input class="boarder-bottom boarder-roun"
+                                id="rating" name="tourTradingAmount" type="number"
+                                formControlName="tourTradingAmount" />
+                        </label>
+                    </fieldset>
+                    <fieldset class="fieldset-group">
+                        <legend>Tour Descriptions</legend>
+                        <label for="tourDescription">
+                            Enter Name Of Tour:
+                            <span *ngIf="itineraryForm.get('tourDescription')?.invalid" class="error-message">
+                                {{ getErrorMessageText1('tourDescription') }}
+                            </span><br>
+
+                            <textarea class="boarder-bottom boarder-roun" id="tourDescription" name="tourDescription"
+                                formControlName="tourDescription" rows="5" cols="50"></textarea>
+                        </label>
+                    </fieldset>
+                </div>
+
+
+                <div class="bg">
+
+                </div>
+                <div class="submit-btn">
+                    <button type="button" (click)="formSubmit()">Create</button>
+                </div><br><br>
+            </form>
+        </fieldset>
+    </div>
+
+
+</main>

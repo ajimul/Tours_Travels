@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ApiService } from '../api-service/api-service.service';
-import { Itinerary } from '../interfaces/share-interface';
+import { Itinerary, ItineraryList } from '../interfaces/share-interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ItinerariesAllCardService } from '../share-data/itineraries-all-card.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-app-itinerary-list',
@@ -13,19 +14,21 @@ import { ItinerariesAllCardService } from '../share-data/itineraries-all-card.se
   styleUrl: './app-itinerary-list.component.css'
 })
 export class AppItineraryListComponent {
+  apiServerUrl = environment.apiBaseUrl;
+
   cardListTitle:string='All Category'
-  basePath: string = "assets/Image/";
   private itinerariesSubject: BehaviorSubject<Itinerary[]> = new BehaviorSubject<Itinerary[]>([]);
-  itineraries$: Observable<Itinerary[]> = this.itineraryService.itinerariesCardData$;  
+  itineraryList$: Observable<ItineraryList[]> = this.itineraryService.itinerariesCardData$;  
+card: any;
 
   constructor(
     private apiService: ApiService,
     private itineraryService: ItinerariesAllCardService) {
-    this.itineraries$ = this.getItineraries();//get data from api call and set data to observable!
+    this.itineraryList$ = this.getItineraries();//get data from api call and set data to observable!
   }
 
-  getItineraries(): Observable<Itinerary[]> {
-    return this.apiService.getAllItineraries();
+  getItineraries(): Observable<ItineraryList[]> {
+    return this.apiService.getAllItineraryLists();
   }
 
   getAndSetItineraries(): void {

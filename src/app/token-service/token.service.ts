@@ -2,22 +2,29 @@ import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class TokenService{
+export class TokenService {
   constructor() {}
 
-  getHeadersWithAuthorization(): HttpHeaders {
+  getCustomContentHeadersWithAuthorization(): HttpHeaders {
+    const token = localStorage.getItem('access_token');
+    return new HttpHeaders({
+      'Content-Type': 'file', //if use only file,need to be spacify Content-Type
+      Authorization: token ? `Bearer ${token}` : '',
+    });
+  }
+  getContentHeadersWithAuthorization(): HttpHeaders {
     const token = localStorage.getItem('access_token');
     return new HttpHeaders({
       'Content-Type': 'application/json', // Adjust Content-Type as needed
       Authorization: token ? `Bearer ${token}` : '',
     });
   }
-  getCustomHeadersWithAuthorization(): HttpHeaders {
+  getContentLessHeadersWithAuthorization(): HttpHeaders {
     const token = localStorage.getItem('access_token');
     return new HttpHeaders({
-      'Content-Type': 'file', //use for multimedia beacuse spring not support other type
+      // 'Content-Type': 'file', //while combination file with other object spring jwt not support for Content-Type
       Authorization: token ? `Bearer ${token}` : '',
     });
   }

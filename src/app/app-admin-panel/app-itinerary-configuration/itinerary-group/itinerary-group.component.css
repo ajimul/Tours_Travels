@@ -1,0 +1,70 @@
+
+main{
+    background-color: #006eff;
+}
+header {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0px;
+    align-items: end;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 2px;
+
+    background-color:transparent;
+}
+
+header>button {
+    outline: none;
+    border: none;
+    background-color: red;
+    color: white;
+    font-size: 1rem;
+}
+.card-container{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 400px;
+    height: 150px;
+    border: solid rgb(206, 201, 201) 0.5px; 
+    background-color: white;
+}
+.card{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 75%;
+    align-items: center;
+    /* border: solid rgb(37, 22, 22); */
+
+}
+.submit-btn{
+   /* border: solid red; */
+    display: flex;
+    flex-wrap: nowrap;
+    width: 25%;
+    align-items: center;
+}
+.submit-btn button{
+    margin-top:18px;
+    border-radius: 5px;
+    border: none;
+    background: #006eff;
+    color: rgb(255, 255, 255);
+    font-size: 1.3rem;
+    padding: 6px;
+
+   
+}
+label{
+    font-size: 1rem;
+}
+input{
+    outline: none;
+    font-size: 1.5rem;
+}
+.card-content{
+    margin: 0;
+    padding: 0;
+}

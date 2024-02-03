@@ -1,0 +1,26 @@
+<main>
+    <header>
+<button type="button" (click)="onCancel()" class="close-btn">X</button>
+</header>
+<div class="card-container">
+    <div class="card">
+        <form [formGroup]="createGroup" (ngSubmit)="formSubmit()">
+            <div class="card-content">
+                <label for="itineraryGroupName">
+                    Enter Group Name:
+                    <span *ngIf="createGroup.get('itineraryGroupName')?.invalid" class="error-message">
+                        {{ getErrorMessageText1('itineraryGroupName') }}
+                    </span>
+                    <input type="text" class="boarder-bottom boarder-roun" id="tourDescription" name="tourDescription"
+                        formControlName="itineraryGroupName">
+                </label>
+            </div>
+        </form>
+    </div>
+    <div class="submit-btn">
+        <button type="button" (click)="formSubmit()">Create</button>
+    </div>
+</div>
+</main>
+
+

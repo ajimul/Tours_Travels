@@ -1,3 +1,8 @@
+  export interface ItineraryList {
+    itineraryListId:number;
+    itineraryGroupName:string;
+    itinerary:Itinerary[];
+  }
   export interface Itinerary {
     itineraryId: number;
     itineraryRef: number;
@@ -14,4 +19,10 @@
     tourPackageDiscount: string;
     tourTradingAmount: string;
   }
+
+  export interface ItineraryListSimpleDTO {
+    itineraryListId: number;
+    itineraryGroupName: string;
+  }
+  
   
