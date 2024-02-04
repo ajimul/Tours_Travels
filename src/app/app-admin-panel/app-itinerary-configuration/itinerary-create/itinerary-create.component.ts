@@ -106,7 +106,7 @@ export class ItineraryCreateComponent {
       ]),
       tourDescription: new FormControl('', [
         Validators.required,
-        CustomValidation.customText1(),
+        CustomValidation.customText3(),
       ]),
       rating: new FormControl(null),
       tourPackageAmount: new FormControl(null),
@@ -125,12 +125,20 @@ export class ItineraryCreateComponent {
       ? this.validationService.getErrorMessageText1(control, '*', '*', '*')
       : null;
   }
+  getErrorMessageText3(controlName: string): string | null {
+    const control = this.itineraryForm.get(controlName);
+    return control
+      ? this.validationService.getErrorMessageText3(control, 'Maximum of approximately 140 words or 850 characters is allowed.')
+      : null;
+  }
+
   getErrorMessageSelect(controlName: string): string | null {
     const control = this.itineraryGroupForm.get(controlName);
     return control
       ? this.validationService.getErrorMessageSelect(control, '*')
       : null;
   }
+
   formSubmit() {
     if (this.itineraryForm.valid && this.itineraryGroupForm.valid) {
       this.apiService

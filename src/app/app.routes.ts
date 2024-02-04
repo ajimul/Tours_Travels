@@ -16,17 +16,16 @@ export const routes: Routes = [
   {
     path: 'home',component: AppHomeComponent, children: [
       { path: '', component: AppPagesDefaultComponent }, // empty path makes it the default with HomePageComponent
+    
     ],
   },
-  // { path: 'login', component: AppLoginComponent },
-  // {
-  //   path: 'control-panel',
-  //   component: AppAdminHomeComponent,
-  //   canActivate: [guardGuard],
-  //   children: [
-  //     {path:'itinerary-view',component:ItineraryViewComponent},
-  //     {path:'app-setting',component:AppSettingComponent},
-  //   ],
-  // },
+  { path: 'login', component: AppLoginComponent},
+  {
+    path: 'control-panel', component: AppAdminHomeComponent,canActivate: [guardGuard],
+    children: [
+      {path:'itinerary-view',component:ItineraryViewComponent},
+      {path:'app-setting',component:AppSettingComponent},
+    ],
+  },
 ];
 

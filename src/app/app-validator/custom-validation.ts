@@ -62,6 +62,21 @@ export class CustomValidation {
       };
     }
   
+
+static customText3(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (value === null || value === undefined || typeof value !== 'string') {
+      return null; 
+    }
+    if (value.trim().length > 850) {
+      return { maxLengthExceeded: true };
+    }
+    
+    return null;
+  };
+}
+
     static customNumber(): ValidatorFn {
       return (control: AbstractControl): { [key: string]: any } | null => {
         const value = control.value;

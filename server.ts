@@ -24,10 +24,11 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
-  // All regular routes use the Angular engine
+  // // All regular routes use the Angular engine
   // server.get('*', (req, res, next) => {
+   
   //   const { protocol, originalUrl, baseUrl, headers } = req;
-
+  //   console.log('response from node originalUrl:'+originalUrl)
   //   commonEngine
   //     .render({
   //       bootstrap,
@@ -41,7 +42,7 @@ export function app(): express.Express {
   // });
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
-    const skipSsrRoutes = ['/login']; // Routes to skip SSR
+    const skipSsrRoutes = ['/login','control-panel','itinerary-view','app-setting']; // Routes to skip SSR
   
     if (skipSsrRoutes.includes(originalUrl)) {
       // Skip SSR, serve base HTML for client-side rendering

@@ -35,7 +35,12 @@ export class CustomValidationService {
     }
     return null;
   }
-
+   getErrorMessageText3(control: AbstractControl, maxWordsMessage: string): string | null {
+    if (control.hasError('maxLengthExceeded')) {
+      return maxWordsMessage;
+    }
+    return null;
+  }
   getErrorMessageNumber(control: AbstractControl,sms1:string,sms2:string): string | null {
     if (control.hasError('required')) {
       return sms1;

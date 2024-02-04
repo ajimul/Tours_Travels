@@ -22,16 +22,7 @@ constructor(
 
  
   
-  ngOnInit() {
-    this.route.url.subscribe(segments => {
-      console.log('Current URL segments:', segments);
-    });
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        // Do something when navigation ends
-        console.log('Navigation ended:', event);
-      }
-    });
+  ngOnInit() {   
   }
   
 }

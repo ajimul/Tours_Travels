@@ -55,16 +55,6 @@ export class AppHeroComponent implements OnInit{
   imageTest?: string;
   ngOnInit() {
     this.itineraryService.getAndSetItineraries();
-    
-    this.apiService.getImage('demo (2).jpg').subscribe(
-      (blob: Blob) => {
-        this.imageBlob = blob;
-        this.createImageUrl();
-      },
-      (error) => {
-        console.error('Error fetching image:', error);
-      }
-    );
   }
       
   createImageUrl(): void {

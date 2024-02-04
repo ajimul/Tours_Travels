@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UserService } from '../../user-service/user.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-app-login',
@@ -36,23 +37,25 @@ export class AppLoginComponent implements OnInit {
   });
 
   loginn() {
-
     if (this.loginform.valid) {
-    
-      this.service.loginn(this.loginform.value).subscribe((result) => {
-        this.responsedata = result;
-        if (this.responsedata != null) {
-          localStorage.removeItem;
-          this.token.setAccessToken(this.responsedata.access_token);
-          this.token.setRefreshToken(this.responsedata.access_token);
-          this.user.initializeCurrentUser();
-          this.route.navigate(['control-panel'], { replaceUrl: false });
-        } else {
-          
+      this.service.loginn(this.loginform.value).subscribe(
+        (result) => {
+          this.responsedata = result;
+          if (this.responsedata != null) {
+            localStorage.removeItem;
+            this.token.setAccessToken(this.responsedata.access_token);
+            this.token.setRefreshToken(this.responsedata.access_token);
+            this.user.initializeCurrentUser();
+            this.route.navigate(['control-panel'], { replaceUrl: false });
+          }
+        },
+        (error) => {
+          console.error('An error occurred:', error);
           alert('login Faield!');
         }
-      });
+      );
     }
   }
+  
  
 }
