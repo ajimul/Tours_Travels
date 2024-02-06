@@ -31,8 +31,8 @@ export class AppLoginComponent implements OnInit {
 
   ngOnInit(): void {}
   loginform = new FormGroup({
-    email: new FormControl('',Validators.required),
-    password: new FormControl('',Validators.required),
+    email: new FormControl('ajay933jpg@gmail.com',Validators.required),
+    password: new FormControl('stupid420',Validators.required),
    
   });
 
@@ -46,7 +46,7 @@ export class AppLoginComponent implements OnInit {
             this.token.setAccessToken(this.responsedata.access_token);
             this.token.setRefreshToken(this.responsedata.access_token);
             this.user.initializeCurrentUser();
-            this.route.navigate(['control-panel'], { replaceUrl: false });
+            this.route.navigate(['control-panel'], { replaceUrl: true });
           }
         },
         (error) => {

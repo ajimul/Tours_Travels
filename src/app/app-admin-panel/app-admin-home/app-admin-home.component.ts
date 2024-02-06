@@ -24,7 +24,7 @@ export class AppAdminHomeComponent implements OnInit {
       next: (value) => {  // Use arrow function here
         this.user.removeCurrentUser();
         localStorage.removeItem('access_token');
-        this.route.navigate(['/login'], { replaceUrl: true });
+        this.route.navigate([''], { replaceUrl: true });
       },
       error: (err) => {
         // Handle error

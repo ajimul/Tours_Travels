@@ -1,4 +1,4 @@
-<section class="page-container img"
+<section  class="page-container img"
   [style.background-image]="(imageUrl | async) ? 'url(' + (imageUrl | async) + ')' : ''">
 
   <div class="container" #container>
@@ -20,4 +20,5 @@
       <button class="next" (click)="next()" id="nextButton"><i class="fas fa-chevron-right fa-xl"></i></button>
     </div>
   </div>
+
 </section>

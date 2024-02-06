@@ -34,6 +34,13 @@
     padding: 20px;
   }
   
+  .footer-bottom img{
+   
+        width: 100px;
+     
+    
+  }
+  
   .footer-bottom>div {
     display: flex;
     flex-direction: row;

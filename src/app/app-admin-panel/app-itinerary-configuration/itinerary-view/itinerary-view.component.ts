@@ -21,7 +21,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Itinerary, ItineraryListSimpleDTO } from '../../../interfaces/share-interface';
 import { ApiService } from '../../../api-service/api-service.service';
-import { error } from 'console';
 @Component({
   selector: 'app-itinerary-view',
   standalone: true,

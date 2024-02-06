@@ -123,6 +123,7 @@ export class ApiService {
   //----------------------------------------------Image Service------------------------------------------------------>
 
   getImage(imageName: string): Observable<Blob> {
+    
     return this.http.get(`${this.apiServerUrl}image/${imageName}`, { responseType: 'blob' });
   }
 

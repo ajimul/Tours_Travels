@@ -23,28 +23,13 @@ export function app(): express.Express {
   server.get('*.*', express.static(browserDistFolder, {
     maxAge: '1y'
   }));
-
-  // // All regular routes use the Angular engine
-  // server.get('*', (req, res, next) => {
-   
-  //   const { protocol, originalUrl, baseUrl, headers } = req;
-  //   console.log('response from node originalUrl:'+originalUrl)
-  //   commonEngine
-  //     .render({
-  //       bootstrap,
-  //       documentFilePath: indexHtml,
-  //       url: `${protocol}://${headers.host}${originalUrl}`,
-  //       publicPath: browserDistFolder,
-  //       providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
-  //     })
-  //     .then((html) => res.send(html))
-  //     .catch((err) => next(err));
-  // });
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
-    const skipSsrRoutes = ['/login','control-panel','itinerary-view','app-setting']; // Routes to skip SSR
-  
-    if (skipSsrRoutes.includes(originalUrl)) {
+    const skipSsrRoutes = ['/login']; // Routes to skip SSR
+  console.log('originalUrl: '+originalUrl)
+  console.log('baseUrl: '+baseUrl)
+  console.log('Url: '+`${protocol}://${headers.host}${originalUrl}`)
+  if (skipSsrRoutes.includes(originalUrl) && !originalUrl.startsWith('/login')) {
       // Skip SSR, serve base HTML for client-side rendering
       res.sendFile(join(browserDistFolder, 'index.html'));
     } else {
@@ -54,6 +39,7 @@ export function app(): express.Express {
           bootstrap,
           documentFilePath: indexHtml,
           url: `${protocol}://${headers.host}${originalUrl}`,
+          
           publicPath: browserDistFolder,
           providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
         })
